@@ -1,0 +1,41 @@
+{
+  "name": "xclass",
+  "version": "1.0.0",
+  "description": "A class name management utility",
+  "main": "xClass.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha --require babel-core/register ./**/test-*.js",
+    "test:watch": "mocha --watch --growl --require babel-core/register ./**/test-*.js"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "plugins": [
+      "transform-object-rest-spread",
+      "transform-es2015-destructuring"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lostclawz/xclass.git"
+  },
+  "keywords": [
+    "html",
+    "classes"
+  ],
+  "author": "Philip Kuperberg",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "babel-core": "^6.25.0",
+    "chai": "^4.1.0",
+    "lodash": "^4.17.4",
+    "babel-plugin-transform-es2015-destructuring": "*",
+    "babel-plugin-transform-object-rest-spread": "*",
+    "babel-preset-es2015": "*",
+    "mocha": "^3.4.2"
+  }
+}
