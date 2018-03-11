@@ -32,7 +32,6 @@
   "dependencies": {
     "babel-core": "^6.25.0",
     "chai": "^4.1.0",
-    "lodash": "^4.17.4",
     "babel-plugin-transform-es2015-destructuring": "*",
     "babel-plugin-transform-object-rest-spread": "*",
     "babel-preset-es2015": "*",

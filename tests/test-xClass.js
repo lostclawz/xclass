@@ -3,7 +3,7 @@ import xClass from '../xClass';
 
 describe('xClass', function(){
 	
-	let testObj = {
+	var testObj = {
 		'a': () => true,
 		'b': () => false,
 		'c': () => true,
@@ -24,7 +24,7 @@ describe('xClass', function(){
 				'a',
 				'b'
 			)
-		).to.equal('a b c e');
+		).to.equal('a c e b');
 	})
 
 	it('can reduce no arguments into an empty string', function(){
@@ -41,7 +41,7 @@ describe('xClass', function(){
 				'b',
 				['ace', 'yxz']
 			)
-		).to.equal('a ace b c e yxz');
+		).to.equal('a c e b ace yxz');
 	})
 
 	it('ignores integer, boolean, and falsey arguments', function(){
@@ -56,7 +56,7 @@ describe('xClass', function(){
 				undefined,
 				['ace', 'yxz']
 			)
-		).to.equal('a ace b c e yxz');
+		).to.equal('a c e b ace yxz');
 	})
 
 	it('does not include duplicate classes', function(){

@@ -1,16 +1,23 @@
-import {
-	isFunction,
-	isArray,
-	isPlainObject,
-	isUndefined,
-	isNull,
-	isString,
-	isBoolean,
-	sortedUniq,
-	compact,
-	chain
-} from 'lodash';
+function isPlainObject(obj){
+	return typeof obj === 'object' && obj.constructor === Object;
+}
 
+function uniq(strArray, removeFalsey=false){
+	var uniqs = {};
+	if (removeFalsey){
+		for (var i = 0; i < strArray.length; i++){
+			if (strArray[i]){
+				uniqs[strArray[i]] = true;
+			}
+		}
+	}
+	else{
+		for (var i = 0; i < strArray.length; i++){
+			uniqs[strArray[i]] = true;
+		}
+	}
+	return Object.keys(uniqs);
+}
 
 export default function xClass(...args){
 
@@ -19,12 +26,12 @@ export default function xClass(...args){
 			// combine class/predicate pairs into an array
 			let cs = [];
 			for (let key in curr){
-				if (isFunction(curr[key])){
+				if (typeof curr[key] === 'function'){
 					if (curr[key]()){
 						cs.push(key);
 					}
 				}
-				else if (isBoolean(curr[key])){
+				else if (typeof curr[key] === 'boolean'){
 					if (curr[key]){
 						cs.push(key);
 					}
@@ -35,7 +42,7 @@ export default function xClass(...args){
 			}
 			return prev.concat(cs);
 		}
-		else if (isArray(curr)){
+		else if (curr instanceof Array){
 			// recursively iterate over array elements
 			return prev.concat(
 				curr.reduce(
@@ -43,10 +50,10 @@ export default function xClass(...args){
 				)
 			);
 		}
-		else if (isString(curr)){
+		else if (typeof curr === 'string'){
 			return prev.concat(curr);
 		}
-		else if (isFunction(curr)){
+		else if (typeof curr === 'function'){
 			// recursively apply function's return
 			return prev.concat(xClass(curr()));
 		}
@@ -55,13 +62,7 @@ export default function xClass(...args){
 		}
 	}, []);
 
-	return chain(classes)
-		.compact()
-		.sort()
-		.sortedUniq()
-		.value()
-		.join(' ');
-		
+	return uniq(classes, true).join(' ');
 }
 
 module.exports = xClass;
